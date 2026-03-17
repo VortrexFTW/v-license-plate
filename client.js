@@ -34,6 +34,8 @@ let position = new Vec2(
 	new Vec2(zeroPosition.y + (screenHeight.y - zeroPosition.y) * renderPosition.y/100, zeroPosition.y + (screenHeight.y - zeroPosition.y) * renderPosition.y/100).y
 );
 
+let playerPosition = new Vec3(0.0, 0.0, 0.0);
+
 // ===========================================================================
 
 bindEventHandler("OnResourceStart", thisResource, function(event, resource) {
@@ -64,14 +66,18 @@ bindEventHandler("OnResourceReady", thisResource, function(event, resource) {
 // ===========================================================================
 
 addEventHandler("OnProcess", function(event, deltaTime) {
-	let playerPosition = (localPlayer.vehicle == null) ? localPlayer.position : localPlayer.vehicle.position;
+	if(localPlayer == null) {
+		return false;
+	}
+
+	playerPosition = (localPlayer.vehicle == null) ? localPlayer.position : localPlayer.vehicle.position;
 	let vehicles = getElementsByType(ELEMENT_VEHICLE);
 	if(vehicles.length == 0) {
 		closestVehicle = null;
-		return;
+		return false;
 	}
 
-	closestVehicle = reduce((prev, curr) => curr.position.distance(playerPosition) < prev.position.distance(playerPosition) ? curr : prev) || null;
+	closestVehicle = vehicles.reduce((prev, curr) => curr.position.distance(playerPosition) < prev.position.distance(playerPosition) ? curr : prev) || null;
 
 	if(screenWidth.x != game.width || screenHeight.y != game.height) {
 		thisResource.restart();
@@ -81,6 +87,10 @@ addEventHandler("OnProcess", function(event, deltaTime) {
 // ===========================================================================
 
 addEventHandler("OnDrawnHUD", function(event) {
+	if(localPlayer == null) {
+		return false;
+	}
+
 	if(backgroundImage == null) {
 		return false;
 	}
