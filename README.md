@@ -1,5 +1,5 @@
 # v-license-plate
-License plate display for GTAC/MafiaC
+License plate display for GTAC/MafiaC  
 *The original background and font are designed as vintage plates for Mafia 1 (1930's), but you can swap the image and font with whatever theme you want*
 
 ## Usage
