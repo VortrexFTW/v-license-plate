@@ -112,9 +112,9 @@ addEventHandler("OnDrawnHUD", function(event) {
 			return false;
 		}
 
-		graphics.drawRectangle(backgroundImage, [position.x - (size.x / 2), position.y - (size.y / 2) - 1], [size.x, size.y]);
-
 		if(closestVehicle.position.distance(playerPosition) <= maxRange) {
+			graphics.drawRectangle(backgroundImage, [position.x - (size.x / 2), position.y - (size.y / 2) - 1], [size.x, size.y]);
+			
 			let mainTextPosition = new Vec2(position.x - size.x / 2 + ((mainTextMargin.x == 0) ? 0 : size.x*mainTextMargin.x), position.y - size.y / 2 + ((mainTextMargin.y == 0) ? 0 : size.x*mainTextMargin.y));
 			mainFont.render(closestVehicle.getData("v.licensePlate"), mainTextPosition, size.x, 0.5, 0.5, mainFont.size, textColour, false, true, false, true);
 			if(closestVehicle.getData("v.licensePlateSubText") != null) {
