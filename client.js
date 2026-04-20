@@ -113,6 +113,8 @@ addEventHandler("OnDrawnHUD", function(event) {
 		}
 
 		if(closestVehicle.position.distance(playerPosition) <= maxRange) {
+			graphics.drawRectangle(null, [position.x - (size.x / 2), position.y - (size.y / 2) - 1], [size.x, size.y], toColour(0, 0, 0, 120), toColour(0, 0, 0, 120), toColour(0, 0, 0, 120), toColour(0, 0, 0, 120));
+
 			graphics.drawRectangle(backgroundImage, [position.x - (size.x / 2), position.y - (size.y / 2) - 1], [size.x, size.y]);
 
 			let mainTextPosition = new Vec2(position.x - size.x / 2 + ((mainTextMargin.x == 0) ? 0 : size.x*mainTextMargin.x), position.y - size.y / 2 + ((mainTextMargin.y == 0) ? 0 : size.x*mainTextMargin.y));
