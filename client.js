@@ -46,6 +46,7 @@ bindEventHandler("OnResourceStart", thisResource, function(event, resource) {
 bindEventHandler("OnResourceReady", thisResource, function(event, resource) {
 	let imageFile = openFile("background.png");
 	if (imageFile != null) {
+		console.log(`[${thisResource.name}] Loading PNG image (Path: "background.png")`);
 		backgroundImage = drawing.loadPNG(imageFile);
 		imageFile.close();
 	}
@@ -75,6 +76,10 @@ addEventHandler("OnProcess", function(event, deltaTime) {
 	if(vehicles.length == 0) {
 		closestVehicle = null;
 		return false;
+	}
+
+	if(localPlayer.vehicle != null) {
+		vehicles = vehicles.filter(veh => veh != localPlayer.vehicle);
 	}
 
 	closestVehicle = vehicles.reduce((prev, curr) => curr.position.distance(playerPosition) < prev.position.distance(playerPosition) ? curr : prev) || null;
